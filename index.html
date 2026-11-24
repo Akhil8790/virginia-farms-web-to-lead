@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Virginia Farms – Bulk Supply Inquiry</title>
+<style>
+  :root{--red:#B3202A;--ink:#1f2328;--muted:#5b6470;--line:#e2ddd6;--bg:#faf8f5}
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  header{background:#fff;border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;gap:16px}
+  header img{height:48px}
+  header span{color:var(--red);font-weight:600;font-size:14px;letter-spacing:.02em}
+  .hero{background:var(--red);color:#fff;padding:40px 24px 90px;text-align:center}
+  .hero h1{margin:0 0 8px;font-size:32px}
+  .hero p{margin:0 auto;max-width:620px;opacity:.92}
+  form{max-width:760px;margin:-60px auto 48px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:8px 0 14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;margin-bottom:22px}
+  .full{grid-column:1/-1}
+  label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  input,select,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid #cfc8bf;border-radius:8px;background:#fff}
+  input:focus,select:focus,textarea:focus{outline:2px solid rgba(179,32,42,.35);border-color:var(--red)}
+  textarea{min-height:90px;resize:vertical}
+  button{background:var(--red);color:#fff;border:0;border-radius:10px;padding:14px 28px;font:600 16px system-ui;cursor:pointer;width:100%}
+  button:hover{background:#951a23}
+  .fine{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><img src="vf-logo.png" alt="Virginia Farms Inc."><span>100% Fresh &amp; Clean</span></header>
+<div class="hero">
+  <h1>Bulk pork supply for your business</h1>
+  <p>Restaurants, hotels, supermarkets and institutions: tell us what you need and our nearest sales team will contact you within one business day.</p>
+</div>
+
+<form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Daj00001Gc5Mj" method="POST">
+  <input type="hidden" name="oid" value="00Daj00001Gc5Mj">
+  <input type="hidden" name="retURL" value="thank-you.html">
+  <input type="hidden" name="lead_source" value="Web">
+
+  <h2>About you</h2>
+  <div class="grid">
+    <div><label for="first_name">First name</label><input id="first_name" name="first_name" maxlength="40" required></div>
+    <div><label for="last_name">Last name</label><input id="last_name" name="last_name" maxlength="80" required></div>
+    <div class="full"><label for="company">Business name</label><input id="company" name="company" maxlength="40" required></div>
+    <div><label for="email">Email</label><input id="email" name="email" type="email" maxlength="80" required></div>
+    <div><label for="phone">Mobile</label><input id="phone" name="phone" maxlength="40" placeholder="+63 9xx xxx xxxx"></div>
+  </div>
+
+  <h2>Your supply needs</h2>
+  <div class="grid">
+    <div><label for="segment">Type of business</label>
+      <select id="segment" name="00Naj00006QJigO" required>
+        <option value="">Select…</option><option>Restaurant</option><option>Hotel</option><option>Institution</option><option>Supermarket</option><option>Corporate</option><option>Reseller</option>
+      </select></div>
+    <div><label for="channel">How would you like to buy?</label>
+      <select id="channel" name="00Naj00006QJigN" required>
+        <option value="">Select…</option><option value="HRI">Bulk supply (HRI)</option><option value="Reseller">Resell our products</option><option value="Corporate ACL">Employee purchase program</option><option value="Home Delivery">Home delivery</option>
+      </select></div>
+    <div><label for="region">Region</label>
+      <select id="region" name="00Naj00006QJigM" required>
+        <option value="">Select…</option><option>Luzon</option><option>Cebu</option><option>Iloilo</option>
+      </select></div>
+    <div><label for="branch">Nearest Pork Shop</label>
+      <select id="branch" name="00Naj00006QJigK">
+        <option value="">Select…</option><option>Molino</option><option value="Imus (Carsadang Bago)">Imus (Carsadang Bago)</option><option>Las Piñas</option><option>Mandaue</option><option>Iloilo Super Terminal</option><option>Iloilo La Paz</option>
+      </select></div>
+    <div><label for="kg">Estimated kg per month</label><input id="kg" name="00Naj00006QJigL" type="number" min="0" step="10" placeholder="e.g. 600"></div>
+    <div><label for="city">City / Province</label><input id="city" name="city" maxlength="40" placeholder="e.g. Bacoor, Cavite"></div>
+    <div class="full"><label for="description">Which cuts are you interested in?</label><textarea id="description" name="description" placeholder="e.g. Liempo, Kasim, Pigue, weekly deliveries"></textarea></div>
+  </div>
+
+  <button type="submit">Send inquiry</button>
+  <p class="fine">Your inquiry goes straight to the Virginia Farms sales team for your region.</p>
+</form>
+<script>
+  // retURL must be absolute: point it at the thank-you page next to this file.
+  document.querySelector('[name=retURL]').value = new URL('thank-you.html', location.href).href;
+  // Keep branch choices consistent with the selected region.
+  const map={Luzon:['Molino','Imus (Carsadang Bago)','Las Piñas'],Cebu:['Mandaue'],Iloilo:['Iloilo Super Terminal','Iloilo La Paz']};
+  const region=document.getElementById('region'), branch=document.getElementById('branch'), all=[...branch.options].slice(1);
+  region.addEventListener('change',()=>{const ok=map[region.value]||all.map(o=>o.value);branch.value='';all.forEach(o=>o.hidden=!ok.includes(o.value));});
+</script>
+</body>
+</html>
